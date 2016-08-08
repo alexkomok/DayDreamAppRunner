@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="tile_image_width">106.5dp</dimen>
+    <dimen name="tile_image_height">94.5dp</dimen>
+</resources>

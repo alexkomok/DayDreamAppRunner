@@ -1,0 +1,9 @@
+C:\dev\adt-bundle\sdk\platform-tools>adb shell
+shell@android:/ $ su
+10|shell@android:/ # mount -o remount,rw /system /system
+shell@android:/ # chmod 777 /system/app
+shell@android:/ # exit
+shell@android:/ $ exit
+
+C:\dev\adt-bundle\sdk\platform-tools>adb push WallpaperChanger.apk system/app
+2920 KB/s (139849 bytes in 0.046s)

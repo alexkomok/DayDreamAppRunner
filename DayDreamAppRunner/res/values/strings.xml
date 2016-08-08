@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Dream Application Runner</string> 
+   	<string name="main_activity">Create Runner for:</string>
+
+   	<string name="runner_activity">Selecte type of Runner</string>
+   	
+   	<string name="selection_wallpaper_activity">Select Wallpaper</string>
+    <string name="result_wallpaper_activity">Selected Wallpapers</string>
+    
+    <string name="selection_app_activity">Select Application</string>
+    <string name="result_app_activity">Selected Wallpapers</string>
+    
+   	<string name="selection_dream_activity">Select Day Dream</string>
+    <string name="result_dream_activity">Selected Day Dreams</string>    
+    
+    <string name="error_activity">Error</string>
+    
+    <string name="create">Create Runner</string>
+    
+    <string name="submit">Next</string>
+	<string name="select_all">Select All</string>
+	<string name="error_title">Error:</string>
+	<string name="set_rendom_component">Set rendom %1$s from the list</string>
+	<string name="set_component">Set %1$s</string>
+	<string name="list">List</string>
+	<string name="random">Random</string>
+	<string name="monday">Monday</string>
+	<string name="tuesday">Tuesday</string>
+	<string name="wednesday">Wednesday</string>
+	<string name="thursday">Thursday</string>
+	<string name="friday">Friday</string>
+	<string name="saturday">Saturday</string>
+	<string name="sunday">Sunday</string>
+	<string name="select_one">Please, select one</string>
+	<string name="select_one_or_more">Please, select one or more</string>
+	<string name="error_update_list">Some wallpapers are missing. Please, update you list</string>
+	<string name="no_settings">There are no settings for this %1$s</string>
+	<string name="no_permission">There is no permission to run. This application must be installed as a System App!</string>
+	<string name="wait">Please wait</string>
+	<string name="radio_all">All apps</string>
+	<string name="radio_sys">System apps</string>
+	<string name="radio_user">User apps</string>
+	<string name="main_apps">Applications</string>
+	<string name="main_dreams">Day Dreams</string>
+	<string name="main_wallpapers">Live Wallpapers</string>
+	<string name="wallpaper">Live Wallpaper</string>
+	<string name="app">Application</string>
+	<string name="dream">Day Dream</string>
+	<string name="settings_save">Save your settings</string>
+	<string name="settings_saved">Your settings have been saved</string>
+	<string name="settings">Settings</string>
+</resources>

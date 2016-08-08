@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+	
+	<LinearLayout 
+	    android:id="@+id/control"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
+	    
+	    <CheckBox
+	        android:id="@+id/select_all"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:onClick="onCheckboxClicked"
+	        android:text="@string/select_all"
+	        android:textStyle="bold" />
+	    
+	    <RadioGroup
+	        android:id="@+id/radioApps"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@+id/select_all"
+	        android:orientation="horizontal"
+	        android:visibility="gone" >
+	
+	        <RadioButton
+	            android:id="@+id/radioAll"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/radio_all"
+	            android:onClick="onRadioButtonClicked"
+	            android:checked="true"/>
+	
+	        <RadioButton
+	            android:id="@+id/radioSys"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:onClick="onRadioButtonClicked"
+	            android:text="@string/radio_sys"/>
+	        
+	        <RadioButton
+	            android:id="@+id/radioUser"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:onClick="onRadioButtonClicked"
+	            android:text="@string/radio_user"/>        
+	
+	    </RadioGroup>
+	</LinearLayout>
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/control"
+        android:choiceMode="multipleChoice" />
+
+    <Button
+        android:id="@+id/button_next"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/submit" />    
+    
+</RelativeLayout>
