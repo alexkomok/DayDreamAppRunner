@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.komok.wallpaperchanger"
+    package="com.komok.dreamapprunner"
     android:versionCode="1"
     android:versionName="1.01">
 
@@ -20,9 +20,9 @@
         
         
         <activity
-            android:name="com.komok.daydream.DayDreamSettingsActivity"
+            android:name="com.komok.dreamapprunner.DreamAppRunnerSettingsActivity"
             android:label="@string/main_activity" >
-            <intent-filter>
+            <intent-filter android:label="@string/main_activity_label" >
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -31,7 +31,7 @@
         
         <activity
             android:name="com.komok.common.MainActivity"
-            android:label="@string/main_activity" >
+            android:label="@string/create" >
         </activity>         
         
         
@@ -142,7 +142,7 @@
         </activity>
         <activity
             android:name="com.komok.appchanger.AppSelectionActivity"
-            android:label="@string/result_app_activity" >
+            android:label="@string/selection_app_activity" >
         </activity>
         
         <activity
@@ -340,12 +340,12 @@
         </activity> -->
         
         <activity
-            android:name="com.komok.daydream.DayDreamResultActivity"
+            android:name="com.komok.dreamapprunner.DreamAppRunnerResultActivity"
             android:label="@string/app_name" >
         </activity>
 
         <service
-            android:name="com.komok.daydream.DayDreamService"
+            android:name="com.komok.dreamapprunner.DreamAppRunnerService"
             android:exported="true"
             android:permission="android.permission.BIND_DREAM_SERVICE"
             android:label="@string/app_name" >

@@ -18,6 +18,7 @@ import android.util.Log;
 import com.komok.common.ApplicationHolder;
 import com.komok.common.BaseHelper;
 import com.komok.common.ExceptionHandler;
+import com.komok.dreamapprunner.R;
 
 abstract class AbstractLiveWallpaperSetterActivity extends Activity {
 
@@ -35,7 +36,7 @@ abstract class AbstractLiveWallpaperSetterActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
-		isPermissionGranted = checkSetWallpaperComponentPermission();
+		isPermissionGranted = BaseHelper.checkSetWallpaperComponentPermission(this);
 
 		if (isPermissionGranted) {
 
@@ -62,11 +63,6 @@ abstract class AbstractLiveWallpaperSetterActivity extends Activity {
 
 	}
 
-	private boolean checkSetWallpaperComponentPermission() {
-		String permission = "android.permission.SET_WALLPAPER_COMPONENT";
-		int res = this.checkCallingOrSelfPermission(permission);
-		return (res == PackageManager.PERMISSION_GRANTED);
-	}
 
 	@Override
 	protected void onStart() {

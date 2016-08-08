@@ -1,4 +1,4 @@
-package com.komok.daydream;
+package com.komok.dreamapprunner;
 
 import java.util.List;
 import java.util.Map;
@@ -11,9 +11,9 @@ import android.os.PowerManager.WakeLock;
 import android.service.dreams.DreamService;
 
 import com.komok.common.BaseHelper;
-import com.komok.wallpaperchanger.R;
+import com.komok.dreamapprunner.R;
 
-public class DayDreamService extends DreamService {
+public class DreamAppRunnerService extends DreamService {
 	List<String> selectedList;
 
 	@Override
@@ -33,7 +33,7 @@ public class DayDreamService extends DreamService {
 		selectedList = BaseHelper.loadDreamChoice(this);
 
 		if (selectedList.size() == 0) {
-			Intent intent = new Intent(this, DayDreamSettingsActivity.class);
+			Intent intent = new Intent(this, DreamAppRunnerSettingsActivity.class);
 
 			// Create a bundle object
 			Bundle b = new Bundle();

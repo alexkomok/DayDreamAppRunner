@@ -373,5 +373,17 @@ public class BaseHelper {
 
 		context.startActivity(intent);
 	}
+	
+	public static boolean checkSetDayDreamComponentPermission(Context context) {
+		String permission = "android.permission.WRITE_SECURE_SETTINGS";
+		int res = context.checkCallingOrSelfPermission(permission);
+		return (res == PackageManager.PERMISSION_GRANTED);
+	}
+	
+	public static boolean checkSetWallpaperComponentPermission(Context context) {
+		String permission = "android.permission.SET_WALLPAPER_COMPONENT";
+		int res = context.checkCallingOrSelfPermission(permission);
+		return (res == PackageManager.PERMISSION_GRANTED);
+	}
 
 }

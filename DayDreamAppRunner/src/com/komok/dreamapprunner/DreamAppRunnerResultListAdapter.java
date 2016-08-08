@@ -1,4 +1,4 @@
-package com.komok.daydream;
+package com.komok.dreamapprunner;
 
 import java.util.List;
 
@@ -12,9 +12,9 @@ import com.komok.itemtouchhelper.AbstractRecyclerListAdapter;
 import com.komok.itemtouchhelper.ItemTouchHelperAdapter;
 import com.komok.itemtouchhelper.OnStartDragListener;
 
-public class DayDreamResultListAdapter extends AbstractRecyclerListAdapter<Tile> implements ItemTouchHelperAdapter {
+public class DreamAppRunnerResultListAdapter extends AbstractRecyclerListAdapter<Tile> implements ItemTouchHelperAdapter {
 
-	public DayDreamResultListAdapter(Context context, OnStartDragListener dragStartListener, List<Tile> selectedTilesList) {
+	public DreamAppRunnerResultListAdapter(Context context, OnStartDragListener dragStartListener, List<Tile> selectedTilesList) {
 		super(context, dragStartListener, selectedTilesList);
 	}
 

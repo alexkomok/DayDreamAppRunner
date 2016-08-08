@@ -17,7 +17,7 @@ import com.komok.common.BaseHelper;
 import com.komok.common.Tile;
 import com.komok.itemtouchhelper.OnStartDragListener;
 import com.komok.itemtouchhelper.SimpleItemTouchHelperCallback;
-import com.komok.wallpaperchanger.R;
+import com.komok.dreamapprunner.R;
 
 public class DayDreamResultActivity extends BaseActivity implements OnClickListener, OnStartDragListener {
 	String day;

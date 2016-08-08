@@ -15,7 +15,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.komok.wallpaperchanger.R;
+import com.komok.dreamapprunner.R;
 
 
 public abstract class AbstractRecyclerListAdapter<T> extends RecyclerView.Adapter<AbstractRecyclerListAdapter.ItemViewHolder>

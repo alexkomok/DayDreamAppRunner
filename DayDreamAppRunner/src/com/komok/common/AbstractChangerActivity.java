@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-import com.komok.wallpaperchanger.R;
+import com.komok.dreamapprunner.R;
 
 public abstract class AbstractChangerActivity<T extends ListActivity> extends BaseActivity implements OnClickListener{
 	

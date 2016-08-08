@@ -7,7 +7,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.BaseAdapter;
 
-import com.komok.wallpaperchanger.R;
+import com.komok.dreamapprunner.R;
 
 public abstract class AbstractEnumerator<T, S extends Tile, A extends BaseAdapter> extends AsyncTask<List<T>, S, Void> {
 	protected Context mContext;

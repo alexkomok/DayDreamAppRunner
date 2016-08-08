@@ -12,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.widget.Toast;
 
 import com.komok.common.Tile;
+import com.komok.dreamapprunner.R;
 import com.komok.itemtouchhelper.AbstractRecyclerListAdapter;
 import com.komok.itemtouchhelper.ItemTouchHelperAdapter;
 import com.komok.itemtouchhelper.OnStartDragListener;

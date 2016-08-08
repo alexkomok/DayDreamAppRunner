@@ -5,7 +5,6 @@ import java.net.URISyntaxException;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
@@ -14,9 +13,9 @@ import android.util.Log;
 import com.komok.common.ApplicationHolder;
 import com.komok.common.BaseHelper;
 import com.komok.common.ExceptionHandler;
-import com.komok.daydream.DayDreamService;
-import com.komok.daydream.DayDreamSettingsActivity;
-import com.komok.wallpaperchanger.R;
+import com.komok.dreamapprunner.DreamAppRunnerService;
+import com.komok.dreamapprunner.DreamAppRunnerSettingsActivity;
+import com.komok.dreamapprunner.R;
 
 abstract public class AbstractDayDreamSetterActivity extends Activity {
 
@@ -33,7 +32,7 @@ abstract public class AbstractDayDreamSetterActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
-		isPermissionGranted = checkSetDayDreamComponentPermission();
+		isPermissionGranted = BaseHelper.checkSetDayDreamComponentPermission(this);
 		error = BaseHelper.ERROR;
 
 	}
@@ -54,7 +53,7 @@ abstract public class AbstractDayDreamSetterActivity extends Activity {
 
 		if (!isPermissionGranted) {
 			error = getString(R.string.no_permission);
-			intent = new Intent(this, DayDreamSettingsActivity.class);
+			intent = new Intent(this, DreamAppRunnerSettingsActivity.class);
 
 			// Create a bundle object
 			Bundle b = new Bundle();
@@ -90,7 +89,7 @@ abstract public class AbstractDayDreamSetterActivity extends Activity {
 				@Override
 				public void run() {
 					Settings.Secure.putString(mContext.getContentResolver(), "screensaver_components", mContext.getApplicationInfo().packageName
-							+ "/" + DayDreamService.class.getName());
+							+ "/" + DreamAppRunnerService.class.getName());
 				}
 
 			}, 300L);
@@ -98,9 +97,4 @@ abstract public class AbstractDayDreamSetterActivity extends Activity {
 
 	}
 
-	private boolean checkSetDayDreamComponentPermission() {
-		String permission = "android.permission.WRITE_SECURE_SETTINGS";
-		int res = this.checkCallingOrSelfPermission(permission);
-		return (res == PackageManager.PERMISSION_GRANTED);
-	}
 }

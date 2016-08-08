@@ -15,6 +15,7 @@ import android.widget.Button;
 import com.komok.common.BaseActivity;
 import com.komok.common.BaseHelper;
 import com.komok.common.Tile;
+import com.komok.dreamapprunner.R;
 import com.komok.itemtouchhelper.OnStartDragListener;
 import com.komok.itemtouchhelper.SimpleItemTouchHelperCallback;
 

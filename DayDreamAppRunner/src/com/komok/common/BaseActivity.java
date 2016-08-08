@@ -6,8 +6,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.komok.daydream.DayDreamSettingsActivity;
-import com.komok.wallpaperchanger.R;
+import com.komok.dreamapprunner.DreamAppRunnerSettingsActivity;
+import com.komok.dreamapprunner.R;
 
 public class BaseActivity extends Activity {
 	
@@ -24,7 +24,7 @@ public class BaseActivity extends Activity {
 	    // Handle item selection
 	    switch (item.getItemId()) {
 	        case R.id.settings:
-	        	intent = new Intent(this, DayDreamSettingsActivity.class);
+	        	intent = new Intent(this, DreamAppRunnerSettingsActivity.class);
 	        	startActivity(intent);
 	            return true;
 	        case R.id.create:

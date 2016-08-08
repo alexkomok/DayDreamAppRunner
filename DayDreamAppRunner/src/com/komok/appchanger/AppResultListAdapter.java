@@ -13,7 +13,7 @@ import com.komok.common.Tile;
 import com.komok.itemtouchhelper.AbstractRecyclerListAdapter;
 import com.komok.itemtouchhelper.ItemTouchHelperAdapter;
 import com.komok.itemtouchhelper.OnStartDragListener;
-import com.komok.wallpaperchanger.R;
+import com.komok.dreamapprunner.R;
 
 public class AppResultListAdapter extends AbstractRecyclerListAdapter<Tile> implements ItemTouchHelperAdapter {
 

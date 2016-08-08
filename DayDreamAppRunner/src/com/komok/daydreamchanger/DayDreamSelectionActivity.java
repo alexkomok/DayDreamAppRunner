@@ -20,7 +20,7 @@ import com.komok.common.AbstractBaseAdapter;
 import com.komok.common.BaseHelper;
 import com.komok.common.IItemChecked;
 import com.komok.common.Tile;
-import com.komok.wallpaperchanger.R;
+import com.komok.dreamapprunner.R;
 
 public class DayDreamSelectionActivity extends BaseListActivity implements OnClickListener, IItemChecked {
 

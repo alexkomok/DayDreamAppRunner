@@ -2,15 +2,16 @@
 <resources>
 
     <string name="app_name">Dream Application Runner</string> 
-   	<string name="main_activity">Create Runner for:</string>
+   	<string name="main_activity">Add Runner</string>
+   	<string name="main_activity_label">Dream App Runner</string>
 
-   	<string name="runner_activity">Selecte type of Runner</string>
+   	<string name="runner_activity">Choose Runner Type</string>
    	
    	<string name="selection_wallpaper_activity">Select Wallpaper</string>
     <string name="result_wallpaper_activity">Selected Wallpapers</string>
     
     <string name="selection_app_activity">Select Application</string>
-    <string name="result_app_activity">Selected Wallpapers</string>
+    <string name="result_app_activity">Selected Application</string>
     
    	<string name="selection_dream_activity">Select Day Dream</string>
     <string name="result_dream_activity">Selected Day Dreams</string>    

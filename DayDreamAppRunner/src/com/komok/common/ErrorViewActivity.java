@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.komok.wallpaperchanger.R;
+import com.komok.dreamapprunner.R;
 
 public class ErrorViewActivity extends Activity {
 	private TextView Textv;

@@ -21,7 +21,7 @@ import com.komok.common.BaseListActivity;
 import com.komok.common.BaseHelper;
 import com.komok.common.IItemChecked;
 import com.komok.common.Tile;
-import com.komok.wallpaperchanger.R;
+import com.komok.dreamapprunner.R;
 
 public class AppSelectionActivity extends BaseListActivity implements OnClickListener, IItemChecked {
 

@@ -1,4 +1,4 @@
-package com.komok.daydream;
+package com.komok.dreamapprunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +18,9 @@ import com.komok.common.BaseHelper;
 import com.komok.common.Tile;
 import com.komok.itemtouchhelper.OnStartDragListener;
 import com.komok.itemtouchhelper.SimpleItemTouchHelperCallback;
-import com.komok.wallpaperchanger.R;
+import com.komok.dreamapprunner.R;
 
-public class DayDreamResultActivity extends BaseActivity implements OnClickListener, OnStartDragListener {
+public class DreamAppRunnerResultActivity extends BaseActivity implements OnClickListener, OnStartDragListener {
 	String day;
 	Button set_dream;
 	RecyclerView listView;
@@ -38,7 +38,7 @@ public class DayDreamResultActivity extends BaseActivity implements OnClickListe
 		mButton.setOnClickListener(this);
 
 		listView = (RecyclerView) findViewById(R.id.outputList);
-		DayDreamResultListAdapter adapter = new DayDreamResultListAdapter(this, this, DayDreamSettingsActivity.selectedTilesList);
+		DreamAppRunnerResultListAdapter adapter = new DreamAppRunnerResultListAdapter(this, this, DreamAppRunnerSettingsActivity.selectedTilesList);
 
 		listView.setHasFixedSize(true);
 		listView.setAdapter(adapter);
@@ -54,7 +54,7 @@ public class DayDreamResultActivity extends BaseActivity implements OnClickListe
 
 		List<String> selectedList = new ArrayList<String>();
 
-		for (Tile tile : DayDreamSettingsActivity.selectedTilesList) {
+		for (Tile tile : DreamAppRunnerSettingsActivity.selectedTilesList) {
 			selectedList.add(tile.mLabel);
 		}
 
@@ -62,7 +62,7 @@ public class DayDreamResultActivity extends BaseActivity implements OnClickListe
 		
 
 		if (selectedList.size() == 0) {
-			Intent intent = new Intent(this, DayDreamSettingsActivity.class);
+			Intent intent = new Intent(this, DreamAppRunnerSettingsActivity.class);
 
 			// Create a bundle object
 			Bundle b = new Bundle();

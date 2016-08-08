@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import com.komok.wallpaperchanger.R;
+import com.komok.dreamapprunner.R;
 
 public abstract class AbstractBaseAdapter<T extends Tile> extends BaseAdapter implements ListAdapter {
 	

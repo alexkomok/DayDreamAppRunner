@@ -9,7 +9,7 @@ import android.util.Log;
 import com.komok.common.ApplicationHolder;
 import com.komok.common.BaseHelper;
 import com.komok.common.ExceptionHandler;
-import com.komok.wallpaperchanger.R;
+import com.komok.dreamapprunner.R;
 
 abstract public class AbstractAppSetterActivity extends Activity {
 
