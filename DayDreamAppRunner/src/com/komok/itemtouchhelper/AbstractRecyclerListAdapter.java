@@ -1,5 +1,6 @@
 package com.komok.itemtouchhelper;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,7 +22,7 @@ import com.komok.dreamapprunner.R;
 public abstract class AbstractRecyclerListAdapter<T> extends RecyclerView.Adapter<AbstractRecyclerListAdapter.ItemViewHolder>
         implements ItemTouchHelperAdapter {
 
-	protected List<T> mTile;
+	protected List<T> mTile = new ArrayList<T>();
     protected final PackageManager mPackageManager;
     protected final OnStartDragListener mDragStartListener;
     protected OnClickListener mViewOnClickListener;

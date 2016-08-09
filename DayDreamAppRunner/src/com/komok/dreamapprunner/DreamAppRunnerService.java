@@ -1,7 +1,6 @@
 package com.komok.dreamapprunner;
 
 import java.util.List;
-import java.util.Map;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +10,6 @@ import android.os.PowerManager.WakeLock;
 import android.service.dreams.DreamService;
 
 import com.komok.common.BaseHelper;
-import com.komok.dreamapprunner.R;
 
 public class DreamAppRunnerService extends DreamService {
 	List<String> selectedList;
@@ -57,8 +55,13 @@ public class DreamAppRunnerService extends DreamService {
 			} else {
 				savedPosition = size - 1;
 			}
-
+			
 			BaseHelper.saveComponentListPosition(nextPosition, this);
+			
+			if(savedPosition == nextPosition){
+				return;
+			}
+			
 			String component = selectedList.get(savedPosition);
 			String[] parts = component.split(BaseHelper.splitter);
 
@@ -72,10 +75,6 @@ public class DreamAppRunnerService extends DreamService {
 				BaseHelper.runDayActivity(BaseHelper.Components.LiveWallpaper, parts[1], this);
 			}
 
-/*			Intent homeIntent = new Intent(Intent.ACTION_MAIN);
-			homeIntent.addCategory(Intent.CATEGORY_HOME);
-			homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivity(homeIntent);*/
 			PowerManager pm = (PowerManager) getApplicationContext().getSystemService(Context.POWER_SERVICE);
 			WakeLock wakeLock = pm.newWakeLock(
 					(PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.FULL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP), "TAG");

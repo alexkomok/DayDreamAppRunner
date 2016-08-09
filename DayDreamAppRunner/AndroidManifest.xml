@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.BIND_DREAM_SERVICE" />
     <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <uses-sdk android:minSdkVersion="17" />
 
