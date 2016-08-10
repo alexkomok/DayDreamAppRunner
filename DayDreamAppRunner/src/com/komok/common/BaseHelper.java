@@ -9,6 +9,7 @@ import org.apache.wink.json4j.JSONArray;
 import org.apache.wink.json4j.JSONException;
 import org.apache.wink.json4j.OrderedJSONObject;
 
+import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +18,9 @@ import android.content.SharedPreferences.Editor;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.os.Build;
+import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
 
 import com.komok.appchanger.AppFridayActivity;
 import com.komok.appchanger.AppListActivity;
@@ -58,6 +62,7 @@ public class BaseHelper {
 	public static final String positionKey = "positionKey";
 	public static final String dreamChoice = "dreamChoice";
 	public static final String splitter = ": ";
+	private static final int defaultTimeOut = 60000;
 
 	public enum Weekday {
 		Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, Random, List
@@ -373,22 +378,48 @@ public class BaseHelper {
 
 		context.startActivity(intent);
 	}
-	
+
 	public static boolean checkSetDayDreamComponentPermission(Context context) {
 		String permission = "android.permission.WRITE_SECURE_SETTINGS";
 		int res = context.checkCallingOrSelfPermission(permission);
 		return (res == PackageManager.PERMISSION_GRANTED);
 	}
-	
+
 	public static boolean checkSetWallpaperComponentPermission(Context context) {
 		String permission = "android.permission.SET_WALLPAPER_COMPONENT";
 		int res = context.checkCallingOrSelfPermission(permission);
 		return (res == PackageManager.PERMISSION_GRANTED);
 	}
-	
+
 	public static String getApplicationName(Context context) {
-	    int stringId = context.getApplicationInfo().labelRes;
-	    return context.getString(stringId);
+		int stringId = context.getApplicationInfo().labelRes;
+		return context.getString(stringId);
+	}
+
+	public static int getSystemTimeOut(Context context) {
+		String timeOutStr = android.provider.Settings.System.getString(context.getContentResolver(),
+				android.provider.Settings.System.SCREEN_OFF_TIMEOUT);
+		int timeOut = timeOutStr == null ? defaultTimeOut : Integer.parseInt(timeOutStr) == -1 ? defaultTimeOut : Integer.parseInt(timeOutStr);
+		return timeOut;
+	}
+
+	@SuppressLint("NewApi")
+	public static void wakeup(Context context) {
+		PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+		boolean isScrennOn = false;
+
+		if (Build.VERSION.SDK_INT >= 20) {
+			isScrennOn = pm.isInteractive();
+		} else {
+			isScrennOn = pm.isScreenOn();
+		}
+
+		if (isScrennOn) {
+			WakeLock wakeLock = pm.newWakeLock(
+					(PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.FULL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP), "TAG");
+			wakeLock.acquire();
+			wakeLock.release();
+		}
 	}
 
 }

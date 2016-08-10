@@ -3,12 +3,12 @@ package com.komok.daydreamchanger;
 import java.net.URISyntaxException;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.komok.common.ApplicationHolder;
 import com.komok.common.BaseHelper;
@@ -24,6 +24,8 @@ abstract public class AbstractDayDreamSetterActivity extends Activity {
 	protected abstract ApplicationHolder getDream();
 
 	protected abstract BaseHelper.Weekday getDay();
+
+	private final long delay = 100L;
 
 	boolean isPermissionGranted;
 	String error;
@@ -41,7 +43,6 @@ abstract public class AbstractDayDreamSetterActivity extends Activity {
 	protected void onStart() {
 		super.onStart();
 
-		final Context mContext = this;
 		ApplicationHolder app = getDream();
 
 		if (app == null) {
@@ -73,26 +74,34 @@ abstract public class AbstractDayDreamSetterActivity extends Activity {
 				ExceptionHandler.caughtException(e, this);
 			}
 
-			Settings.Secure.putString(this.getContentResolver(), "screensaver_components", intent.getComponent().flattenToString());
-
-			intent = new Intent(Intent.ACTION_MAIN);
-
-			// Somnabulator is undocumented--may be removed in a future
-			// version...
-			intent.setClassName("com.android.systemui", "com.android.systemui.Somnambulator");
-
-			startActivity(intent);
+			Settings.Secure.putString(getContentResolver(), "screensaver_components", intent.getComponent().flattenToString());
 
 			Handler mHandler = new Handler();
 			mHandler.postDelayed(new Runnable() {
 
 				@Override
 				public void run() {
-					Settings.Secure.putString(mContext.getContentResolver(), "screensaver_components", mContext.getApplicationInfo().packageName
-							+ "/" + DreamAppRunnerService.class.getName());
+
+					Intent intent = new Intent(Intent.ACTION_MAIN);
+
+					intent.setClassName("com.android.systemui", "com.android.systemui.Somnambulator");
+					Toast.makeText(getApplicationContext(), getString(R.string.starting), Toast.LENGTH_LONG).show();
+					startActivity(intent);
+
+					Handler mHandler = new Handler();
+					mHandler.postDelayed(new Runnable() {
+
+						@Override
+						public void run() {
+							Settings.Secure.putString(getContentResolver(), "screensaver_components", getApplicationInfo().packageName + "/"
+									+ DreamAppRunnerService.class.getName());
+						}
+					}, delay);
+
 				}
 
-			}, 300L);
+			}, delay);
+
 		}
 
 	}

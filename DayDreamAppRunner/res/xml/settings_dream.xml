@@ -1,2 +1,2 @@
 <dream xmlns:android="http://schemas.android.com/apk/res/android"
-    android:settingsActivity="com.komok.wallpaperchanger/com.komok.daydream.DayDreamSettingsActivity" />
+    android:settingsActivity="com.komok.dreamapprunner/com.komok.daydream.DayDreamSettingsActivity" />
