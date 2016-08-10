@@ -29,6 +29,7 @@ import android.view.LayoutInflater;
 
 import com.komok.common.AbstractBaseAdapter;
 import com.komok.common.AbstractEnumerator;
+import com.komok.common.BaseHelper;
 import com.komok.common.Tile;
 
 public class DayDreamListAdapter extends AbstractBaseAdapter<Tile> {
@@ -40,11 +41,13 @@ public class DayDreamListAdapter extends AbstractBaseAdapter<Tile> {
 	private Field fieldDreamActivity;
 	private int[] attributes;
 	private int settingsActivityId;
+	private final String appLabel;
 
 	@SuppressWarnings("unchecked")
 	public DayDreamListAdapter(Context context) {
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		mPackageManager = context.getPackageManager();
+		appLabel = BaseHelper.getApplicationName(context);
 		List<ResolveInfo> list = mPackageManager.queryIntentServices(new Intent(DreamService.SERVICE_INTERFACE), PackageManager.GET_META_DATA);
 		mTiles = new ArrayList<Tile>();
 		new DayDreamEnumerator(context, this).execute(list);
@@ -100,8 +103,8 @@ public class DayDreamListAdapter extends AbstractBaseAdapter<Tile> {
 
 				ComponentName componentName = getSettingsComponentName(mPackageManager, resolveInfo);
 				tile.mSettingsActivity = componentName == null ? null : componentName.getClassName();
-
-				publishProgress(tile);
+				if(!tile.mLabel.equals(appLabel))
+					publishProgress(tile);
 			}
 			// Send a null object to show loading is finished
 			publishProgress((Tile) null);

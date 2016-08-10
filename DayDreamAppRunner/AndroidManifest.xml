@@ -240,7 +240,7 @@
         </activity>
         <activity
             android:name="com.komok.daydreamchanger.DayDreamSelectionActivity"
-            android:label="@string/result_dream_activity" >
+            android:label="@string/selection_dream_activity" >
         </activity>
         
         <activity

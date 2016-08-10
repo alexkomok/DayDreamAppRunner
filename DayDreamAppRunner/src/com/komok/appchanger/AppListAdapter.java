@@ -21,11 +21,13 @@ import com.komok.common.Tile;
 public class AppListAdapter extends AbstractBaseAdapter<Tile> {
 
 	private final PackageManager mPackageManager;
+	private final String appLabel;
 
 	@SuppressWarnings("unchecked")
 	public AppListAdapter(Context context, BaseHelper.Apps apps) {
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		mPackageManager = context.getPackageManager();
+		appLabel = BaseHelper.getApplicationName(context);
 
 		final Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
 		mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -92,7 +94,7 @@ public class AppListAdapter extends AbstractBaseAdapter<Tile> {
 				Intent launchIntent = BaseHelper.getIntent(info.packageName, packageManager);
 				String label = (String) packageManager.getApplicationLabel(info);
 
-				if (launchIntent != null && label != null) {
+				if (launchIntent != null && label != null && !label.equals(appLabel)) {
 					Tile application = new Tile(thumb, launchIntent, label);
 					publishProgress(application);
 				}

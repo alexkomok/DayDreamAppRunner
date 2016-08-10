@@ -6,6 +6,8 @@ import android.content.Context;
 import android.support.v4.view.MotionEventCompat;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 import com.komok.common.Tile;
 import com.komok.itemtouchhelper.AbstractRecyclerListAdapter;
@@ -36,6 +38,18 @@ public class DreamAppRunnerResultListAdapter extends AbstractRecyclerListAdapter
 				return false;
 			}
 		});
+		
+		mViewOnClickListener = new OnClickListener() {
+			public void onClick(View v) {
+
+				if (tile.mIntent != null) {
+					v.getContext().startActivity(tile.mIntent);
+				} else
+					Toast.makeText(v.getContext(), String.format(v.getContext().getString(R.string.no_settings),v.getContext().getString(R.string.dream)), Toast.LENGTH_LONG).show();
+			}
+		};
+		
+		holder.holderView.setOnClickListener(mViewOnClickListener);
 
 	}
 }

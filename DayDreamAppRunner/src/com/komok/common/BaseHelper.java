@@ -385,5 +385,10 @@ public class BaseHelper {
 		int res = context.checkCallingOrSelfPermission(permission);
 		return (res == PackageManager.PERMISSION_GRANTED);
 	}
+	
+	public static String getApplicationName(Context context) {
+	    int stringId = context.getApplicationInfo().labelRes;
+	    return context.getString(stringId);
+	}
 
 }
