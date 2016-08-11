@@ -3,12 +3,14 @@ package com.komok.daydreamchanger;
 import java.net.URISyntaxException;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.komok.common.ApplicationHolder;
 import com.komok.common.BaseHelper;
@@ -19,16 +21,19 @@ import com.komok.dreamapprunner.R;
 
 abstract public class AbstractDayDreamSetterActivity extends Activity {
 
-	private static final String TAG = "AbstractAppSetterActivity";
+	private static final String TAG = AbstractDayDreamSetterActivity.class.toString();
 
 	protected abstract ApplicationHolder getDream();
 
 	protected abstract BaseHelper.Weekday getDay();
+	public static boolean isDreamStarted;
 
-	private final long delay = 100L;
+	private final long delay = 2000L;
 
 	boolean isPermissionGranted;
 	String error;
+	private BroadcastReceiver receiver;
+    private IntentFilter filter;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,25 @@ abstract public class AbstractDayDreamSetterActivity extends Activity {
 		Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
 		isPermissionGranted = BaseHelper.checkSetDayDreamComponentPermission(this);
 		error = BaseHelper.ERROR;
+		
+        receiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent)
+            {
+                Log.d(TAG, TAG + " received broacast intent: " + intent);
+                if (intent.getAction().equals(Intent.ACTION_DREAMING_STOPPED)) {
+                    Log.d(TAG, "received dream stoped");
+                    isDreamStarted = false;
+                } else if (intent.getAction().equals(Intent.ACTION_DREAMING_STARTED)) {
+                    Log.d(TAG, "started dream started");
+                    isDreamStarted = true;
+                }
+            }
+        };
+
+        filter = new IntentFilter(Intent.ACTION_DREAMING_STOPPED);
+        filter.addAction(Intent.ACTION_DREAMING_STARTED);
+        super.registerReceiver(receiver, filter);
 
 	}
 
@@ -73,10 +97,39 @@ abstract public class AbstractDayDreamSetterActivity extends Activity {
 				Log.e(TAG, "Failed to set app: " + e);
 				ExceptionHandler.caughtException(e, this);
 			}
-
+			
 			Settings.Secure.putString(getContentResolver(), "screensaver_components", intent.getComponent().flattenToString());
+		
+			final Intent dreamIntent = new Intent(Intent.ACTION_MAIN);
 
-			Handler mHandler = new Handler();
+			dreamIntent.setClassName("com.android.systemui", "com.android.systemui.Somnambulator");
+			//Toast.makeText(getApplicationContext(), getString(R.string.starting), Toast.LENGTH_LONG).show();
+			
+			startActivity(dreamIntent);
+			
+
+
+			final Handler mHandler = new Handler();
+			
+			Runnable runnable = new Runnable() {
+
+				@Override
+				public void run() {
+					if(isDreamStarted){
+						Settings.Secure.putString(getContentResolver(), "screensaver_components", getApplicationInfo().packageName + "/"
+								+ DreamAppRunnerService.class.getName());
+					} else {
+						startActivity(dreamIntent);
+						mHandler.postDelayed(this, delay);
+					}
+					Log.d(TAG, "received dream started=" + isDreamStarted);
+				}
+			};
+			
+			mHandler.postDelayed(runnable, delay);	
+			
+			
+/*			Handler mHandler = new Handler();
 			mHandler.postDelayed(new Runnable() {
 
 				@Override
@@ -87,6 +140,7 @@ abstract public class AbstractDayDreamSetterActivity extends Activity {
 					intent.setClassName("com.android.systemui", "com.android.systemui.Somnambulator");
 					Toast.makeText(getApplicationContext(), getString(R.string.starting), Toast.LENGTH_LONG).show();
 					startActivity(intent);
+					//BaseHelper.wakeup(getApplicationContext());
 
 					Handler mHandler = new Handler();
 					mHandler.postDelayed(new Runnable() {
@@ -96,11 +150,12 @@ abstract public class AbstractDayDreamSetterActivity extends Activity {
 							Settings.Secure.putString(getContentResolver(), "screensaver_components", getApplicationInfo().packageName + "/"
 									+ DreamAppRunnerService.class.getName());
 						}
-					}, delay);
+					}, BaseHelper.getSystemTimeOut(getApplicationContext())- delay);
 
 				}
 
-			}, delay);
+			}, delay);*/
+			
 
 		}
 
