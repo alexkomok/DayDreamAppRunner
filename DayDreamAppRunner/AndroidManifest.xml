@@ -249,6 +249,8 @@
             android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+				<action android:name="android.intent.action.DREAMING_STARTED" />
+				<action android:name="android.intent.action.DREAMING_STOPPED" />                
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -267,7 +269,8 @@
             android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
+				<action android:name="android.intent.action.DREAMING_STARTED" />
+				<action android:name="android.intent.action.DREAMING_STOPPED" /> 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -276,7 +279,8 @@
             android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
+				<action android:name="android.intent.action.DREAMING_STARTED" />
+				<action android:name="android.intent.action.DREAMING_STOPPED" /> 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -285,7 +289,8 @@
             android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
+				<action android:name="android.intent.action.DREAMING_STARTED" />
+				<action android:name="android.intent.action.DREAMING_STOPPED" /> 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -294,7 +299,8 @@
             android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
+				<action android:name="android.intent.action.DREAMING_STARTED" />
+				<action android:name="android.intent.action.DREAMING_STOPPED" /> 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -303,7 +309,8 @@
             android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
+				<action android:name="android.intent.action.DREAMING_STARTED" />
+				<action android:name="android.intent.action.DREAMING_STOPPED" /> 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -312,7 +319,8 @@
             android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
+				<action android:name="android.intent.action.DREAMING_STARTED" />
+				<action android:name="android.intent.action.DREAMING_STOPPED" /> 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -321,7 +329,8 @@
             android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
+				<action android:name="android.intent.action.DREAMING_STARTED" />
+				<action android:name="android.intent.action.DREAMING_STOPPED" /> 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>        

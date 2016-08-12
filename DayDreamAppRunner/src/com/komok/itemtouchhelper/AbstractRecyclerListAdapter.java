@@ -29,7 +29,7 @@ public abstract class AbstractRecyclerListAdapter<T> extends RecyclerView.Adapte
 
     public AbstractRecyclerListAdapter(final Context context, OnStartDragListener dragStartListener, List<T> selectedTilesList) {
         mDragStartListener = dragStartListener;
-        mTile = selectedTilesList;
+        mTile = selectedTilesList == null ? Collections.EMPTY_LIST : selectedTilesList ;
         mPackageManager = context.getPackageManager();
     }
 

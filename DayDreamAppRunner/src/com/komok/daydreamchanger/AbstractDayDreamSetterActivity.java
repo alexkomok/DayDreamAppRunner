@@ -26,6 +26,7 @@ abstract public class AbstractDayDreamSetterActivity extends Activity {
 	protected abstract ApplicationHolder getDream();
 
 	protected abstract BaseHelper.Weekday getDay();
+
 	public static boolean isDreamStarted;
 
 	private final long delay = 2000L;
@@ -33,7 +34,7 @@ abstract public class AbstractDayDreamSetterActivity extends Activity {
 	boolean isPermissionGranted;
 	String error;
 	private BroadcastReceiver receiver;
-    private IntentFilter filter;
+	private IntentFilter filter;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -41,25 +42,25 @@ abstract public class AbstractDayDreamSetterActivity extends Activity {
 		Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
 		isPermissionGranted = BaseHelper.checkSetDayDreamComponentPermission(this);
 		error = BaseHelper.ERROR;
-		
-        receiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent)
-            {
-                Log.d(TAG, TAG + " received broacast intent: " + intent);
-                if (intent.getAction().equals(Intent.ACTION_DREAMING_STOPPED)) {
-                    Log.d(TAG, "received dream stoped");
-                    isDreamStarted = false;
-                } else if (intent.getAction().equals(Intent.ACTION_DREAMING_STARTED)) {
-                    Log.d(TAG, "started dream started");
-                    isDreamStarted = true;
-                }
-            }
-        };
 
-        filter = new IntentFilter(Intent.ACTION_DREAMING_STOPPED);
-        filter.addAction(Intent.ACTION_DREAMING_STARTED);
-        super.registerReceiver(receiver, filter);
+		receiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				Log.d(TAG, TAG + " received broacast intent: " + intent);
+				if (intent.getAction().equals(Intent.ACTION_DREAMING_STOPPED)) {
+					Log.d(TAG, "received dream stoped");
+					isDreamStarted = false;
+					finish();
+				} else if (intent.getAction().equals(Intent.ACTION_DREAMING_STARTED)) {
+					Log.d(TAG, "received dream started");
+					isDreamStarted = true;
+				}
+			}
+		};
+
+		filter = new IntentFilter(Intent.ACTION_DREAMING_STOPPED);
+		filter.addAction(Intent.ACTION_DREAMING_STARTED);
+		super.registerReceiver(receiver, filter);
 
 	}
 
@@ -97,65 +98,36 @@ abstract public class AbstractDayDreamSetterActivity extends Activity {
 				Log.e(TAG, "Failed to set app: " + e);
 				ExceptionHandler.caughtException(e, this);
 			}
-			
+
 			Settings.Secure.putString(getContentResolver(), "screensaver_components", intent.getComponent().flattenToString());
-		
+
 			final Intent dreamIntent = new Intent(Intent.ACTION_MAIN);
 
 			dreamIntent.setClassName("com.android.systemui", "com.android.systemui.Somnambulator");
-			//Toast.makeText(getApplicationContext(), getString(R.string.starting), Toast.LENGTH_LONG).show();
-			
+			dreamIntent.addFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
 			startActivity(dreamIntent);
-			
-
 
 			final Handler mHandler = new Handler();
-			
+
 			Runnable runnable = new Runnable() {
+
+				long timeLeft = BaseHelper.getSystemTimeOut(getApplicationContext());
 
 				@Override
 				public void run() {
-					if(isDreamStarted){
+					if (isDreamStarted || (!isDreamStarted && timeLeft < 0)) {
 						Settings.Secure.putString(getContentResolver(), "screensaver_components", getApplicationInfo().packageName + "/"
 								+ DreamAppRunnerService.class.getName());
 					} else {
 						startActivity(dreamIntent);
+						timeLeft = timeLeft - delay;
 						mHandler.postDelayed(this, delay);
 					}
-					Log.d(TAG, "received dream started=" + isDreamStarted);
+					Log.d(TAG, "received dream started=" + isDreamStarted + ", timeLeft=" + timeLeft);
 				}
 			};
-			
-			mHandler.postDelayed(runnable, delay);	
-			
-			
-/*			Handler mHandler = new Handler();
-			mHandler.postDelayed(new Runnable() {
 
-				@Override
-				public void run() {
-
-					Intent intent = new Intent(Intent.ACTION_MAIN);
-
-					intent.setClassName("com.android.systemui", "com.android.systemui.Somnambulator");
-					Toast.makeText(getApplicationContext(), getString(R.string.starting), Toast.LENGTH_LONG).show();
-					startActivity(intent);
-					//BaseHelper.wakeup(getApplicationContext());
-
-					Handler mHandler = new Handler();
-					mHandler.postDelayed(new Runnable() {
-
-						@Override
-						public void run() {
-							Settings.Secure.putString(getContentResolver(), "screensaver_components", getApplicationInfo().packageName + "/"
-									+ DreamAppRunnerService.class.getName());
-						}
-					}, BaseHelper.getSystemTimeOut(getApplicationContext())- delay);
-
-				}
-
-			}, delay);*/
-			
+			mHandler.postDelayed(runnable, delay);
 
 		}
 

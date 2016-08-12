@@ -46,7 +46,6 @@ public class DreamAppRunnerService extends DreamService {
 			intent.putExtras(b);
 
 			startActivity(intent);
-			finish();
 		} else {
 
 			int savedPosition = BaseHelper.loadComponentListPosition(this);
@@ -60,10 +59,6 @@ public class DreamAppRunnerService extends DreamService {
 
 			BaseHelper.saveComponentListPosition(nextPosition, this);
 
-/*			if (savedPosition == nextPosition) {
-				return;
-			}*/
-
 			String component = selectedList.get(savedPosition);
 			String[] parts = component.split(BaseHelper.splitter);
 
@@ -72,35 +67,36 @@ public class DreamAppRunnerService extends DreamService {
 			} else if (BaseHelper.Components.DayDream.name().equals(parts[0])) {
 				BaseHelper.runDayActivity(BaseHelper.Components.DayDream, parts[1], this);
 
-				
 				Handler mHandler = new Handler();
 				mHandler.postDelayed(new Runnable() {
 
 					@Override
 					public void run() {
-						if(AbstractDayDreamSetterActivity.isDreamStarted){
+						if (AbstractDayDreamSetterActivity.isDreamStarted) {
 							BaseHelper.wakeup(getApplicationContext());
 							Settings.Secure.putString(getContentResolver(), "screensaver_components", getApplicationInfo().packageName + "/"
 									+ DreamAppRunnerService.class.getName());
-	
+
 							Intent intent = new Intent(Intent.ACTION_MAIN);
-							intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-	
+							intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+
 							intent.setClassName("com.android.systemui", "com.android.systemui.Somnambulator");
 							getApplication().startActivity(intent);
+						} else {
+							Settings.Secure.putString(getContentResolver(), "screensaver_components", getApplicationInfo().packageName + "/"
+									+ DreamAppRunnerService.class.getName());
 						}
 
 					}
 
 				}, BaseHelper.getSystemTimeOut(this));
-				
+
 			} else if (BaseHelper.Components.LiveWallpaper.name().equals(parts[0])) {
 				BaseHelper.runDayActivity(BaseHelper.Components.LiveWallpaper, parts[1], this);
-			} 
-			
+			}
+
 			BaseHelper.wakeup(this);
-				
-			
+
 		}
 		finish();
 	}

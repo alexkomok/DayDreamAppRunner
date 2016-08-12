@@ -396,10 +396,10 @@ public class BaseHelper {
 		return context.getString(stringId);
 	}
 
-	public static int getSystemTimeOut(Context context) {
+	public static long getSystemTimeOut(Context context) {
 		String timeOutStr = android.provider.Settings.System.getString(context.getContentResolver(),
 				android.provider.Settings.System.SCREEN_OFF_TIMEOUT);
-		int timeOut = timeOutStr == null ? defaultTimeOut : Integer.parseInt(timeOutStr) == -1 ? defaultTimeOut : Integer.parseInt(timeOutStr);
+		long timeOut = timeOutStr == null ? defaultTimeOut : Long.parseLong(timeOutStr) == -1L ? defaultTimeOut : Long.parseLong(timeOutStr);
 		return timeOut;
 	}
 
