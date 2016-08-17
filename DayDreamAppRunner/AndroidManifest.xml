@@ -51,6 +51,7 @@
         </activity>
 
         <activity
+            android:theme="@style/ThemeNoTitleBarWallpaper"
             android:name="com.komok.wallpaperchanger.LiveWallpaperRandomActivity"
             android:noHistory="true" >
             <intent-filter>
@@ -60,6 +61,7 @@
             </intent-filter>
         </activity>
         <activity
+            android:theme="@style/ThemeNoTitleBarWallpaper"
             android:name="com.komok.wallpaperchanger.LiveWallpaperListActivity"
             android:noHistory="true" >
             <intent-filter>
@@ -69,6 +71,7 @@
             </intent-filter>
         </activity>        
         <activity
+            android:theme="@style/ThemeNoTitleBarWallpaper"
             android:name="com.komok.wallpaperchanger.LiveWallpaperMondayActivity"
             android:noHistory="true" >
             <intent-filter>
@@ -78,6 +81,7 @@
             </intent-filter>
         </activity>
         <activity
+            android:theme="@style/ThemeNoTitleBarWallpaper"
             android:name="com.komok.wallpaperchanger.LiveWallpaperTuesdayActivity"
             android:noHistory="true" >
             <intent-filter>
@@ -87,6 +91,7 @@
             </intent-filter>
         </activity>
         <activity
+            android:theme="@style/ThemeNoTitleBarWallpaper"
             android:name="com.komok.wallpaperchanger.LiveWallpaperWednesdayActivity"
             android:noHistory="true" >
             <intent-filter>
@@ -96,6 +101,7 @@
             </intent-filter>
         </activity>
         <activity
+            android:theme="@style/ThemeNoTitleBarWallpaper"
             android:name="com.komok.wallpaperchanger.LiveWallpaperThursdayActivity"
             android:noHistory="true" >
             <intent-filter>
@@ -105,6 +111,7 @@
             </intent-filter>
         </activity>
         <activity
+            android:theme="@style/ThemeNoTitleBarWallpaper"
             android:name="com.komok.wallpaperchanger.LiveWallpaperFridayActivity"
             android:noHistory="true" >
             <intent-filter>
@@ -114,6 +121,7 @@
             </intent-filter>
         </activity>
         <activity
+            android:theme="@style/ThemeNoTitleBarWallpaper"
             android:name="com.komok.wallpaperchanger.LiveWallpaperSaturdayActivity"
             android:noHistory="true" >
             <intent-filter>
@@ -123,6 +131,7 @@
             </intent-filter>
         </activity>
         <activity
+            android:theme="@style/ThemeNoTitleBarWallpaper"
             android:name="com.komok.wallpaperchanger.LiveWallpaperSundayActivity"
             android:noHistory="true" >
             <intent-filter>

@@ -8,7 +8,6 @@ import android.app.Activity;
 import android.app.WallpaperManager;
 import android.content.ComponentName;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -81,6 +80,7 @@ abstract class AbstractLiveWallpaperSetterActivity extends Activity {
 
 		try {
 			intent = Intent.parseUri(wallpaper.getUri(), 0);
+			startService(intent);
 		} catch (URISyntaxException e) {
 			Log.e(TAG, "Failed to set wallpaper: " + e);
 			ExceptionHandler.caughtException(e, this);
@@ -102,9 +102,10 @@ abstract class AbstractLiveWallpaperSetterActivity extends Activity {
 				intent = new Intent(WallpaperService.SERVICE_INTERFACE);
 				intent.setClassName(packageName, className);
 				method.invoke(objIWallpaperManager, intent.getComponent());
+				getWindow().getDecorView().setSystemUiVisibility(1);
 				isSuccess = true;
 
-				Handler mHandler = new Handler();
+/*				Handler mHandler = new Handler();
 				mHandler.postDelayed(new Runnable() {
 
 					@Override
@@ -115,7 +116,7 @@ abstract class AbstractLiveWallpaperSetterActivity extends Activity {
 						startActivity(homeIntent);
 					}
 
-				}, 200L);
+				}, 200L);*/
 
 				// }
 			} catch (IllegalAccessException e) {
