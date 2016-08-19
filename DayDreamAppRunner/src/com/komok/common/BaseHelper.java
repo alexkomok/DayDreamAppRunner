@@ -65,7 +65,7 @@ public class BaseHelper {
 	private static final int defaultTimeOut = 60000;
 
 	public enum Weekday {
-		Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, Random, List
+		Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, Random, List, Current
 	};
 
 	public enum Apps {
@@ -211,19 +211,19 @@ public class BaseHelper {
 			return 0;
 	}
 
-	public static void saveWallpapersMap(Map<String, String> inputMap, Context context, String randomMap) {
-		saveMap(inputMap, context, randomMap, wallpaperChangerSettings);
+	public static void saveWallpapersMap(Map<String, String> inputMap, Context context, String day) {
+		saveMap(inputMap, context, day, wallpaperChangerSettings);
 	}
 
-	public static void saveAppsMap(Map<String, String> inputMap, Context context, String randomMap) {
-		saveMap(inputMap, context, randomMap, appChangerSettings);
+	public static void saveAppsMap(Map<String, String> inputMap, Context context, String day) {
+		saveMap(inputMap, context, day, appChangerSettings);
 	}
 
-	public static void saveDreamsMap(Map<String, String> inputMap, Context context, String randomMap) {
-		saveMap(inputMap, context, randomMap, dreamChangerSettings);
+	public static void saveDreamsMap(Map<String, String> inputMap, Context context, String day) {
+		saveMap(inputMap, context, day, dreamChangerSettings);
 	}
 
-	private static void saveMap(Map<String, String> inputMap, Context context, String randomMap, String settings) {
+	private static void saveMap(Map<String, String> inputMap, Context context, String day, String settings) {
 		SharedPreferences pSharedPref = context.getSharedPreferences(settings, Context.MODE_PRIVATE);
 		if (pSharedPref != null) {
 
@@ -237,8 +237,8 @@ public class BaseHelper {
 
 			String jsonString = jsonObject.toString();
 			Editor editor = pSharedPref.edit();
-			editor.remove(randomMap).commit();
-			editor.putString(randomMap, jsonString);
+			editor.remove(day).commit();
+			editor.putString(day, jsonString);
 			editor.commit();
 		}
 	}

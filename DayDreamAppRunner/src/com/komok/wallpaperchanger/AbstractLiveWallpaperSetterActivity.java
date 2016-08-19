@@ -10,7 +10,6 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.service.wallpaper.WallpaperService;
 import android.util.Log;
 
@@ -19,7 +18,7 @@ import com.komok.common.BaseHelper;
 import com.komok.common.ExceptionHandler;
 import com.komok.dreamapprunner.R;
 
-abstract class AbstractLiveWallpaperSetterActivity extends Activity {
+public abstract class AbstractLiveWallpaperSetterActivity extends Activity {
 
 	private static final String TAG = "AbstractLiveWallpaperSetterActivity";
 
@@ -61,7 +60,6 @@ abstract class AbstractLiveWallpaperSetterActivity extends Activity {
 		}
 
 	}
-
 
 	@Override
 	protected void onStart() {
@@ -105,20 +103,6 @@ abstract class AbstractLiveWallpaperSetterActivity extends Activity {
 				getWindow().getDecorView().setSystemUiVisibility(1);
 				isSuccess = true;
 
-/*				Handler mHandler = new Handler();
-				mHandler.postDelayed(new Runnable() {
-
-					@Override
-					public void run() {
-						Intent homeIntent = new Intent(Intent.ACTION_MAIN);
-						homeIntent.addCategory(Intent.CATEGORY_HOME);
-						homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-						startActivity(homeIntent);
-					}
-
-				}, 200L);*/
-
-				// }
 			} catch (IllegalAccessException e) {
 				Log.e(TAG, "Failed to set wallpaper: " + e);
 				ExceptionHandler.caughtException(e, this);
