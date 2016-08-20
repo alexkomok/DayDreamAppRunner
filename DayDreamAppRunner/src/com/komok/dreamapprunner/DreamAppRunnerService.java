@@ -8,12 +8,15 @@ import android.annotation.SuppressLint;
 import android.app.WallpaperInfo;
 import android.app.WallpaperManager;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.service.dreams.DreamService;
 import android.service.wallpaper.WallpaperService;
+import android.widget.Toast;
 
 import com.komok.common.ApplicationHolder;
 import com.komok.common.BaseHelper;
@@ -32,7 +35,7 @@ public class DreamAppRunnerService extends DreamService {
 		setFullscreen(false);
 
 	}
-	
+
 	private void saveCurrentLWP() {
 		WallpaperInfo wi = ((WallpaperManager) this.getSystemService("wallpaper")).getWallpaperInfo();
 		if (wi != null) {
@@ -45,18 +48,34 @@ public class DreamAppRunnerService extends DreamService {
 		} else {
 			WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
 			Drawable wallpaperDrawable = wallpaperManager.getDrawable();
+			Bitmap bitmap = ((BitmapDrawable) wallpaperDrawable).getBitmap();
+			BaseHelper.saveImage(this, bitmap, "wallpaperback", "jpg");
+			Map<String, String> map = new LinkedHashMap<String, String>();
+			BaseHelper.saveWallpapersMap(map, this, BaseHelper.Weekday.Current.name());
 		}
 	}
-	
-	private void restoreCurrentLWP(){
-		startActivity(new Intent(this,LiveWallpaperCurrentActivity.class));
+
+	private void restoreCurrentLWP() {
+		if (BaseHelper.loadWallpapersMap(this, BaseHelper.Weekday.Current.name()).size() > 0) {
+			//startActivity(new Intent(this, LiveWallpaperCurrentActivity.class));
+		} else {
+			Bitmap bitmap = BaseHelper.getImageBitmap(this, "wallpaperback", "jpg");
+			WallpaperManager myWallpaperManager = WallpaperManager.getInstance(getApplicationContext());
+			try {
+				myWallpaperManager.setBitmap(bitmap);
+			} catch (Exception e) {
+				Toast.makeText(this, "Error setting Wallpaper", Toast.LENGTH_SHORT).show();
+			}
+
+		}
+
 	}
-	
+
 	private class LiveWallpaperCurrentActivity extends AbstractLiveWallpaperSetterActivity {
 
 		@Override
 		protected ApplicationHolder getLiveWallpaper() {
-			return  BaseHelper.loadLiveWallpaper(this, getDay());
+			return BaseHelper.loadLiveWallpaper(this, getDay());
 		}
 
 		@Override
@@ -100,6 +119,8 @@ public class DreamAppRunnerService extends DreamService {
 
 			String component = selectedList.get(savedPosition);
 			String[] parts = component.split(BaseHelper.splitter);
+			
+			restoreCurrentLWP();
 
 			if (BaseHelper.Components.Application.name().equals(parts[0])) {
 				BaseHelper.runDayActivity(BaseHelper.Components.Application, parts[1], this);
@@ -117,7 +138,7 @@ public class DreamAppRunnerService extends DreamService {
 									+ DreamAppRunnerService.class.getName());
 
 							Intent intent = new Intent(Intent.ACTION_MAIN);
-							intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+							intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
 							intent.setClassName("com.android.systemui", "com.android.systemui.Somnambulator");
 							getApplication().startActivity(intent);
@@ -131,7 +152,6 @@ public class DreamAppRunnerService extends DreamService {
 				}, BaseHelper.getSystemTimeOut(this));
 
 			} else if (BaseHelper.Components.LiveWallpaper.name().equals(parts[0])) {
-				//restoreCurrentLWP();
 				saveCurrentLWP();
 				BaseHelper.runDayActivity(BaseHelper.Components.LiveWallpaper, parts[1], this);
 			}
