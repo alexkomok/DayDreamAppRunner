@@ -29,7 +29,7 @@ abstract public class AbstractDayDreamSetterActivity extends Activity {
 
 	public static boolean isDreamStarted;
 
-	private final long delay = 2000L;
+	private final long delay = 1000L;
 
 	boolean isPermissionGranted;
 	String error;
@@ -60,9 +60,22 @@ abstract public class AbstractDayDreamSetterActivity extends Activity {
 
 		filter = new IntentFilter(Intent.ACTION_DREAMING_STOPPED);
 		filter.addAction(Intent.ACTION_DREAMING_STARTED);
-		super.registerReceiver(receiver, filter);
+		this.registerReceiver(receiver, filter);
 
 	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		try {
+			this.unregisterReceiver(receiver);
+		} catch (final Exception exception) {
+			// The receiver was not registered.
+			// There is nothing to do in that case.
+			// Everything is fine.
+		}
+	}
+	
 
 	@Override
 	protected void onStart() {
