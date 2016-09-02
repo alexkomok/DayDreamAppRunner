@@ -1,7 +1,5 @@
 package com.komok.common;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -20,11 +18,6 @@ import android.content.SharedPreferences.Editor;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
@@ -72,7 +65,7 @@ public class BaseHelper {
 	private static final int defaultTimeOut = 60000;
 
 	public enum Weekday {
-		Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, Random, List, Current
+		Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, Random, List
 	};
 
 	public enum Apps {
@@ -428,52 +421,5 @@ public class BaseHelper {
 			wakeLock.release();
 		}
 	}
-	
-	public static Bitmap drawableToBitmap (Drawable drawable) {
-	    Bitmap bitmap = null;
 
-	    if (drawable instanceof BitmapDrawable) {
-	        BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
-	        if(bitmapDrawable.getBitmap() != null) {
-	            return bitmapDrawable.getBitmap();
-	        }
-	    }
-
-	    if(drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
-	        bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
-	    } else {
-	        bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-	    }
-
-	    Canvas canvas = new Canvas(bitmap);
-	    drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-	    drawable.draw(canvas);
-	    return bitmap;
-	}
-
-	
-	public static void saveImage(Context context, Bitmap b,String name,String extension){
-	    name=name+"."+extension;
-	    FileOutputStream out;
-	    try {
-	        out = context.openFileOutput(name, Context.MODE_PRIVATE);
-	        b.compress(Bitmap.CompressFormat.JPEG, 90, out);
-	        out.close();
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
-	}
-	
-	public static Bitmap getImageBitmap(Context context,String name,String extension){
-		name=name+"."+extension;  
-		try{
-		    FileInputStream fis = context.openFileInput(name);
-		        Bitmap b = BitmapFactory.decodeStream(fis);
-		        fis.close();
-		        return b;
-		    }
-		    catch(Exception e){
-		    }
-		    return null;
-		}
 }
