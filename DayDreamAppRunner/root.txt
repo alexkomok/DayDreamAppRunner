@@ -1,9 +1,24 @@
 C:\dev\adt-bundle\sdk\platform-tools>adb shell
 shell@android:/ $ su
-10|shell@android:/ # mount -o remount,rw /system /system
+root@android:/ # mount -o remount,rw /system /system
+
+or root@android:/ # mount -o remount,rw /system
+
 shell@android:/ # chmod 777 /system/app
 shell@android:/ # exit
 shell@android:/ $ exit
 
 C:\dev\adt-bundle\sdk\platform-tools>adb push WallpaperChanger.apk system/app
 2920 KB/s (139849 bytes in 0.046s)
+
+
+C:\dev\adt-bundle\sdk\platform-tools>adb push WallpaperChanger.apk /mnt/sdcard
+adb shell
+su
+mount -o rw,remount /system
+su
+mkdir /system/priv-app/DayDreamRunner
+chmod 777 /system/priv-app/DayDreamRunner
+cd /sdcard
+cp WallpaperChanger.apk /system/priv-app
+chmod 644 /system/priv-app/WallpaperChanger.apk
