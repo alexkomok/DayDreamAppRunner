@@ -53,4 +53,7 @@
 	<string name="settings_saved">Your settings have been saved</string>
 	<string name="settings">Settings</string>
 	<string name="starting">Starting Day Dream...</string>
+	<string name="live_wallpaper_loading">Loading live wallpaper…</string>
+	<string name="wallpaper_instructions">Set wallpaper</string>
+	<string name="configure_wallpaper">Settings…</string>
 </resources>
